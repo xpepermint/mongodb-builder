@@ -39,6 +39,7 @@ var path = require("path");
 var fs = require("mz/fs");
 var Seeder = (function () {
     function Seeder(cfg) {
+        if (cfg === void 0) { cfg = {}; }
         this.recipes = [];
         this.cfg = cfg;
     }

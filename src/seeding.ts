@@ -1,6 +1,5 @@
 import * as path from 'path';
 import * as fs from 'mz/fs';
-import { Collection } from 'mongodb';
 
 /**
  * Seed recipe interface.
@@ -13,7 +12,6 @@ export interface SeedRecipe {
  * Migrator configuration interface.
  */
 export interface SeederConfig {
-  collection: Collection;
   ctx?: any;
 }
 
@@ -28,7 +26,7 @@ export class Seeder {
    * Class constructor.
    * @param cfg Configuration object.
    */
-  public constructor(cfg: SeederConfig) {
+  public constructor(cfg: SeederConfig = {}) {
     this.cfg = cfg;
   }
 

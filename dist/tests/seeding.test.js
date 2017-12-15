@@ -70,7 +70,6 @@ ava_1["default"].serial('method `perform` runs seed operations', function (t) { 
             case 0:
                 count = 0;
                 seeder = new src_1.Seeder({
-                    collection: t.context.collection,
                     ctx: { val: 1 }
                 });
                 seeder.add({
@@ -93,9 +92,7 @@ ava_1["default"].serial('method `addDir` loads seeds from directory', function (
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                seeder = new src_1.Seeder({
-                    collection: t.context.collection
-                });
+                seeder = new src_1.Seeder();
                 return [4, seeder.addDir(__dirname + "/assets/seeds")];
             case 1:
                 _a.sent();
