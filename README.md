@@ -1,6 +1,6 @@
-![Build Status](https://travis-ci.org/xpepermint/mongodb-builder.svg?branch=master)&nbsp;[![NPM Version](https://badge.fury.io/js/migratable.svg)](https://badge.fury.io/js/migratable)&nbsp;[![Dependency Status](https://gemnasium.com/xpepermint/mongodb-builder.svg)](https://gemnasium.com/xpepermint/mongodb-builder)
+![Build Status](https://travis-ci.org/xpepermint/mongodb-builder.svg?branch=master)&nbsp;[![NPM Version](https://badge.fury.io/js/mongodb-builder.svg)](https://badge.fury.io/js/mongodb-builder)&nbsp;[![Dependency Status](https://gemnasium.com/xpepermint/mongodb-builder.svg)](https://gemnasium.com/xpepermint/mongodb-builder)
 
-# Migratable.js
+# mongodb-builder
 
 > MongoDB migration framework.
 
@@ -112,7 +112,7 @@ Seed operations are similar to migrations. The difference is only that they can 
 
 ```js
 import { MongoClient } from 'mongodb';
-import { Seeder } from 'migratable';
+import { Seeder } from 'mongodb-builder';
 
 // connecting to the database
 const mongo = await MongoClient.connect('mongodb://localhost:27017');
