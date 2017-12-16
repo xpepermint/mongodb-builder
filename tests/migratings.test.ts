@@ -125,5 +125,5 @@ test.serial('method `addDir` loads migrations from directory', async (t) => {
   });
   await migrator.addDir(`${__dirname}/assets/migrations`);
 
-  t.is(migrator.recipes.length, 1);
+  t.is(migrator.recipes.length, 2);
 });

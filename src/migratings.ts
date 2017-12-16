@@ -1,5 +1,4 @@
-import * as path from 'path';
-import * as fs from 'mz/fs';
+import * as globby from 'globby';
 import { Collection } from 'mongodb';
 
 /**
@@ -43,20 +42,21 @@ export class Migrator {
 
   /**
    * Loads migrations from directory.
-   * @param dirPath Path to a folder with migration files.
+   * @param dir Path to a folder with migration files.
    */
-  public async addDir(dirPath: string) {
-    let fileNames = await fs.readdir(dirPath);
+  public async addDir(dir: string) {
+    let files = await globby([dir]);
 
-    fileNames.forEach((fileName) => {
+    files.sort().forEach((file) => {
       let recipe;
-      try { recipe = require(path.join(dirPath, fileName)); } catch (e) {}
+      try { recipe = require(file); } catch (e) {}
 
       const isValid = (
         !!recipe
         && typeof recipe.upgrade !== 'undefined'
         && typeof recipe.downgrade !== 'undefined'
       );
+
       if (isValid) {
         this.add(recipe);
       }

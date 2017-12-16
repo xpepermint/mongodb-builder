@@ -1,5 +1,4 @@
-import * as path from 'path';
-import * as fs from 'mz/fs';
+import * as globby from 'globby';
 
 /**
  * Seed recipe interface.
@@ -42,17 +41,18 @@ export class Seeder {
    * Loads seeds from directory.
    * @param dirPath Path to a folder with seed files.
    */
-  public async addDir(dirPath: string) {
-    let fileNames = await fs.readdir(dirPath);
+  public async addDir(dir: string) {
+    let files = await globby([dir]);
 
-    fileNames.forEach((fileName) => {
+    files.sort().forEach((file) => {
       let recipe;
-      try { recipe = require(path.join(dirPath, fileName)); } catch (e) {}
+      try { recipe = require(file); } catch (e) {}
 
       const isValid = (
         !!recipe
         && typeof recipe.perform !== 'undefined'
       );
+
       if (isValid) {
         this.add(recipe);
       }

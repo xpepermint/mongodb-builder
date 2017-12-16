@@ -9,7 +9,7 @@ export declare class Seeder {
     recipes: SeedRecipe[];
     constructor(cfg?: SeederConfig);
     add(recipe: SeedRecipe): void;
-    addDir(dirPath: string): Promise<void>;
+    addDir(dir: string): Promise<void>;
     remove(index: number): SeedRecipe[];
     perform(): Promise<number>;
 }

@@ -33,5 +33,5 @@ test.serial('method `addDir` loads seeds from directory', async (t) => {
   let seeder = new Seeder();
   await seeder.addDir(`${__dirname}/assets/seeds`);
 
-  t.is(seeder.recipes.length, 1);
+  t.is(seeder.recipes.length, 2);
 });

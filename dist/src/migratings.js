@@ -35,8 +35,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-var path = require("path");
-var fs = require("mz/fs");
+var globby = require("globby");
 var Migrator = (function () {
     function Migrator(cfg) {
         this.recipes = [];
@@ -45,19 +44,19 @@ var Migrator = (function () {
     Migrator.prototype.add = function (recipe) {
         this.recipes.push(recipe);
     };
-    Migrator.prototype.addDir = function (dirPath) {
+    Migrator.prototype.addDir = function (dir) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
-            var fileNames;
+            var files;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4, fs.readdir(dirPath)];
+                    case 0: return [4, globby([dir])];
                     case 1:
-                        fileNames = _a.sent();
-                        fileNames.forEach(function (fileName) {
+                        files = _a.sent();
+                        files.sort().forEach(function (file) {
                             var recipe;
                             try {
-                                recipe = require(path.join(dirPath, fileName));
+                                recipe = require(file);
                             }
                             catch (e) { }
                             var isValid = (!!recipe

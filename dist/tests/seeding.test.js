@@ -96,7 +96,7 @@ ava_1["default"].serial('method `addDir` loads seeds from directory', function (
                 return [4, seeder.addDir(__dirname + "/assets/seeds")];
             case 1:
                 _a.sent();
-                t.is(seeder.recipes.length, 1);
+                t.is(seeder.recipes.length, 2);
                 return [2];
         }
     });

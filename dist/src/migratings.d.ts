@@ -12,7 +12,7 @@ export declare class Migrator {
     recipes: MigrationRecipe[];
     constructor(cfg: MigratorConfig);
     add(recipe: MigrationRecipe): void;
-    addDir(dirPath: string): Promise<void>;
+    addDir(dir: string): Promise<void>;
     remove(index: number): MigrationRecipe[];
     lastIndex(): Promise<number>;
     upgrade(steps?: number): Promise<number>;
