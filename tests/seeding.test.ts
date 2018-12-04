@@ -3,7 +3,7 @@ import { MongoClient } from 'mongodb';
 import { Seeder } from '../src';
 
 test.beforeEach(async (t) => {
-  t.context.client = await MongoClient.connect('mongodb://localhost:27017/test');
+  t.context.client = await MongoClient.connect('mongodb://localhost:27017/test', { useNewUrlParser: true });
   t.context.collection = t.context.client.db('test').collection('migrations');
 });
 test.afterEach(async (t) => {
@@ -13,14 +13,14 @@ test.afterEach(async (t) => {
 test.serial('method `perform` runs seed operations', async (t) => {
   let count = 0;
   let seeder = new Seeder({
-    ctx: { val: 1 },
+    context: { val: 1 },
   });
 
   seeder.add({
-    perform: (ctx) => count = count + ctx.val, // also testing context
+    perform: (context) => count = count + context.val, // also testing context
   });
   seeder.add({
-    perform: (ctx) => count = count + ctx.val,
+    perform: (context) => count = count + context.val,
   });
 
   let index = await seeder.perform();

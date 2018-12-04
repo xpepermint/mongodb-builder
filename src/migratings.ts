@@ -5,8 +5,8 @@ import { Collection } from 'mongodb';
  * Migration recipe interface.
  */
 export interface MigrationRecipe {
-  upgrade?: (ctx?: any) => (any | Promise<any>);
-  downgrade?: (ctx?: any) => (any | Promise<any>);
+  upgrade?: (context?: any) => (any | Promise<any>);
+  downgrade?: (context?: any) => (any | Promise<any>);
 }
 
 /**
@@ -14,7 +14,7 @@ export interface MigrationRecipe {
  */
 export interface MigratorConfig {
   collection: Collection;
-  ctx?: any;
+  context?: any;
 }
 
 /**
@@ -100,7 +100,7 @@ export class Migrator {
       }
 
       if (recipe.upgrade) {
-        await recipe.upgrade(this.cfg.ctx);
+        await recipe.upgrade(this.cfg.context);
         lastIndex++;
         await this.cfg.collection.update({ kind: 0 }, { kind: 0, index: lastIndex }, { upsert: true });
       }
@@ -131,7 +131,7 @@ export class Migrator {
       }
 
       if (recipe.downgrade) {
-        await recipe.downgrade(this.cfg.ctx);
+        await recipe.downgrade(this.cfg.context);
         lastIndex--;
         await this.cfg.collection.update({ kind: 0 }, { kind: 0, index: lastIndex }, { upsert: true });
       }

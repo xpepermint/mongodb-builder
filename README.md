@@ -34,27 +34,27 @@ const mongo = await MongoClient.connect('mongodb://localhost:27017');
 // initialize migration class
 const migrator = new Migrator({
   collection: mongo.db('test').collection('migrations'), // required
-  ctx: { foo: "foo" }, // optional
+  context: { foo: "foo" }, // optional
 });
 
 // register migrations (you could move this object into a separate file)
 migrator.add({
-  upgrade: async (ctx) => { /* do something */ },
-  downgrade: async (ctx) => { /* do something */ },
+  upgrade: async (context) => { /* do something */ },
+  downgrade: async (context) => { /* do something */ },
 });
 
 // run `upgrade` migrations
 await migrator.upgrade();
 ```
 
-**Migrator({ db, ctx })**
+**Migrator({ db, context })**
 
 > Performs MongoDB migration operations.
 
 | Option | Type | Required | Default | Description
 |--------|------|----------|---------|------------
 | collection | Collection | Yes | - | Instance of MongoDB collection.
-| ctx | Object | No | - | Object which is passed into each `up` and `down` method.
+| context | Object | No | - | Object which is passed into each `up` and `down` method.
 
 **migrator.add({ upgrade, downgrade })**
 
@@ -74,8 +74,8 @@ await migrator.upgrade();
 | path | String | Yes | - | Path to the directory with migration files.
 
 ```js
-export async function upgrade(ctx) {}
-export async function downgrade(ctx) {}
+export async function upgrade(context) {}
+export async function downgrade(context) {}
 ```
 
 **migrator.remove(index)**
@@ -120,26 +120,26 @@ const mongo = await MongoClient.connect('mongodb://localhost:27017');
 // initialize migration class
 const seeder = new Seeder(
   collection: mongo.db('test').collection('migrations'), // required
-  ctx: { foo: "foo" }, // optional
+  context: { foo: "foo" }, // optional
 );
 
 // register migrations (you could move this object into a separate file)
 seeder.add({
-  perform: async (ctx) => { /* do something */ },
+  perform: async (context) => { /* do something */ },
 });
 
 // run `perform` methods
 await seeder.perform();
 ```
 
-**Seeder({ db, ctx })**
+**Seeder({ db, context })**
 
 > Performs MongoDB seed operations.
 
 | Option | Type | Required | Default | Description
 |--------|------|----------|---------|------------
 | collection | Collection | Yes | - | Instance of MongoDB collection.
-| ctx | Object | No | - | Object which is passed into each `perform` method.
+| context | Object | No | - | Object which is passed into each `perform` method.
 
 **seeder.add({ seed })**
 
@@ -158,7 +158,7 @@ await seeder.perform();
 | path | String | Yes | - | Path to the directory with seed files.
 
 ```js
-export async function perform(ctx) {}
+export async function perform(context) {}
 ```
 
 **seeder.remove(index)**

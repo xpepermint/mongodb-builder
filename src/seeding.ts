@@ -4,14 +4,14 @@ import * as globby from 'globby';
  * Seed recipe interface.
  */
 export interface SeedRecipe {
-  perform?: (ctx?: any) => (any | Promise<any>);
+  perform?: (context?: any) => (any | Promise<any>);
 }
 
 /**
  * Migrator configuration interface.
  */
 export interface SeederConfig {
-  ctx?: any;
+  context?: any;
 }
 
 /**
@@ -77,7 +77,7 @@ export class Seeder {
       let recipe = this.recipes[i];
 
       if (recipe.perform) {
-        await recipe.perform(this.cfg.ctx);
+        await recipe.perform(this.cfg.context);
       }
 
       lastIndex = i;

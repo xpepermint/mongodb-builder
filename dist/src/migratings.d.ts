@@ -1,11 +1,11 @@
 import { Collection } from 'mongodb';
 export interface MigrationRecipe {
-    upgrade?: (ctx?: any) => (any | Promise<any>);
-    downgrade?: (ctx?: any) => (any | Promise<any>);
+    upgrade?: (context?: any) => (any | Promise<any>);
+    downgrade?: (context?: any) => (any | Promise<any>);
 }
 export interface MigratorConfig {
     collection: Collection;
-    ctx?: any;
+    context?: any;
 }
 export declare class Migrator {
     readonly cfg: MigratorConfig;

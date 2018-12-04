@@ -1,4 +1,4 @@
 /**
  * Seed logic.
  */
-export async function perform(ctx) {}
+export async function perform(context) {}

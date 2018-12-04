@@ -1,8 +1,8 @@
 export interface SeedRecipe {
-    perform?: (ctx?: any) => (any | Promise<any>);
+    perform?: (context?: any) => (any | Promise<any>);
 }
 export interface SeederConfig {
-    ctx?: any;
+    context?: any;
 }
 export declare class Seeder {
     readonly cfg: SeederConfig;

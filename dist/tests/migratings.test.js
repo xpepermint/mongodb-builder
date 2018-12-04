@@ -14,8 +14,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
         while (_) try {
-            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [0, t.value];
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
                 case 0: case 1: t = op; break;
                 case 4: _.label++; return { value: op[1], done: false };
@@ -45,7 +45,7 @@ ava_1["default"].beforeEach(function (t) { return __awaiter(_this, void 0, void 
         switch (_b.label) {
             case 0:
                 _a = t.context;
-                return [4, mongodb_1.MongoClient.connect('mongodb://localhost:27017')];
+                return [4, mongodb_1.MongoClient.connect('mongodb://localhost:27017', { useNewUrlParser: true })];
             case 1:
                 _a.client = _b.sent();
                 t.context.collection = t.context.client.db('test').collection('migrations');
@@ -71,13 +71,13 @@ ava_1["default"].serial('method `upgrade` runs migrations', function (t) { retur
                 count = 0;
                 migrator = new src_1.Migrator({
                     collection: t.context.collection,
-                    ctx: { val: 1 }
+                    context: { val: 1 }
                 });
                 migrator.add({
-                    upgrade: function (ctx) { return count = count + ctx.val; }
+                    upgrade: function (context) { return count = count + context.val; }
                 });
                 migrator.add({
-                    upgrade: function (ctx) { return count = count + ctx.val; }
+                    upgrade: function (context) { return count = count + context.val; }
                 });
                 return [4, migrator.upgrade()];
             case 1:
@@ -97,7 +97,7 @@ ava_1["default"].serial('method `upgrade` runs only new migrations', function (t
                 migrator = new src_1.Migrator({
                     collection: t.context.collection
                 });
-                return [4, t.context.collection.update({ kind: 0 }, { kind: 0, index: 0 }, { upsert: true })];
+                return [4, t.context.collection.updateMany({ kind: 0 }, { $set: { kind: 0, index: 0 } }, { upsert: true })];
             case 1:
                 _a.sent();
                 migrator.add({
@@ -147,19 +147,19 @@ ava_1["default"].serial('method `downgrade` performs migrations', function (t) {
                 count = 0;
                 migrator = new src_1.Migrator({
                     collection: t.context.collection,
-                    ctx: { val: 1 }
+                    context: { val: 1 }
                 });
-                return [4, t.context.collection.update({ kind: 0 }, { kind: 0, index: 2 }, { upsert: true })];
+                return [4, t.context.collection.updateMany({ kind: 0 }, { $set: { kind: 0, index: 2 } }, { upsert: true })];
             case 1:
                 _a.sent();
                 migrator.add({
-                    downgrade: function (ctx) { return count = count + ctx.val; }
+                    downgrade: function (context) { return count = count + context.val; }
                 });
                 migrator.add({
-                    downgrade: function (ctx) { return count = count + ctx.val; }
+                    downgrade: function (context) { return count = count + context.val; }
                 });
                 migrator.add({
-                    downgrade: function (ctx) { return count = count + ctx.val; }
+                    downgrade: function (context) { return count = count + context.val; }
                 });
                 return [4, migrator.downgrade()];
             case 2:
@@ -179,7 +179,7 @@ ava_1["default"].serial('method `downgrade` performs only a certain number of mi
                 migrator = new src_1.Migrator({
                     collection: t.context.collection
                 });
-                return [4, t.context.collection.update({ kind: 0 }, { kind: 0, index: 1 }, { upsert: true })];
+                return [4, t.context.collection.updateMany({ kind: 0 }, { $set: { kind: 0, index: 1 } }, { upsert: true })];
             case 1:
                 _a.sent();
                 migrator.add({

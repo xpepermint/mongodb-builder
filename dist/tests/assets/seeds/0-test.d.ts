@@ -1,1 +1,1 @@
-export declare function perform(ctx: any): Promise<void>;
+export declare function perform(context: any): Promise<void>;

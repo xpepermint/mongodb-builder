@@ -1,9 +1,9 @@
 /**
  * Upgrade logic.
  */
-export async function upgrade(ctx) {}
+export async function upgrade(context) {}
 
 /**
  * Downgrade logic.
  */
-export async function downgrade(ctx) {}
+export async function downgrade(context) {}
