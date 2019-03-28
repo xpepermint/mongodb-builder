@@ -1,4 +1,4 @@
-import * as globby from 'globby';
+import globby from 'globby';
 import { Collection } from 'mongodb';
 
 /**
@@ -102,7 +102,7 @@ export class Migrator {
       if (recipe.upgrade) {
         await recipe.upgrade(this.cfg.context);
         lastIndex++;
-        await this.cfg.collection.update({ kind: 0 }, { kind: 0, index: lastIndex }, { upsert: true });
+        await this.cfg.collection.updateMany({ kind: 0 }, { $set: { kind: 0, index: lastIndex } }, { upsert: true });
       }
     }
 
@@ -133,7 +133,7 @@ export class Migrator {
       if (recipe.downgrade) {
         await recipe.downgrade(this.cfg.context);
         lastIndex--;
-        await this.cfg.collection.update({ kind: 0 }, { kind: 0, index: lastIndex }, { upsert: true });
+        await this.cfg.collection.updateMany({ kind: 0 }, { $set: { kind: 0, index: lastIndex } }, { upsert: true });
       }
     }
 

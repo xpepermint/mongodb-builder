@@ -1,4 +1,4 @@
-import * as globby from 'globby';
+import globby from 'globby';
 
 /**
  * Seed recipe interface.

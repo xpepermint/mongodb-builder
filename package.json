@@ -1,24 +1,23 @@
 {
   "name": "mongodb-builder",
-  "version": "0.4.0",
+  "version": "0.6.1",
   "description": "MongoDB migration framework.",
-  "main": "./dist/src/index.js",
-  "types": "./dist/src/index.d.ts",
-  "ava": {
-    "files": [
-      "./dist/tests/*.test.js",
-      "./dist/tests/**/*.test.js"
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "hayspec": {
+    "require": [
+      "ts-node/register"
     ],
-    "concurrency": 1,
-    "failFast": true
+    "match": [
+      "./src/tests/**/*.test.ts"
+    ]
   },
   "scripts": {
     "clean": "rm -Rf ./dist",
     "build": "npm run clean; tsc",
-    "example": "npm run build && node dist/example",
     "lint": "tslint 'src/**/*.ts?(x)'",
     "prepublish": "npm run build",
-    "test": "npm run build && ava"
+    "test": "npx hayspec test"
   },
   "repository": {
     "type": "git",
@@ -45,16 +44,18 @@
   ],
   "author": "Kristijan Sedlak (Xpepermint)",
   "license": "MIT",
-  "devDependencies": {
-    "@types/globby": "^8.0.0",
-    "@types/mongodb": "^3.1.17",
-    "@types/node": "^10.12.12",
-    "ava": "^0.25.0",
-    "mongodb": "^3.1.10",
-    "tslint": "^5.11.0",
-    "typescript": "^3.2.1"
-  },
   "dependencies": {
-    "globby": "^7.1.1"
+    "globby": "^9.1.0"
+  },
+  "devDependencies": {
+    "@hayspec/cli": "^0.8.3",
+    "@hayspec/spec": "^0.8.3",
+    "@types/globby": "^9.1.0",
+    "@types/mongodb": "^3.1.22",
+    "@types/node": "^11.12.0",
+    "mongodb": "^3.2.2",
+    "ts-node": "^8.0.3",
+    "tslint": "^5.14.0",
+    "typescript": "^3.3.4000"
   }
 }
