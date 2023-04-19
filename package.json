@@ -48,7 +48,7 @@
     "globby": "^9.1.0"
   },
   "devDependencies": {
-    "@hayspec/cli": "^0.8.3",
+    "@hayspec/cli": "^0.10.2",
     "@hayspec/spec": "^0.8.3",
     "@types/globby": "^9.1.0",
     "@types/mongodb": "^3.1.22",
